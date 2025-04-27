@@ -3,28 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello</title>
+    <title>Floating Candle Flame</title>
     <style>
         body {
+            margin: 0;
+            height: 100vh;
+            background: black;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            overflow: hidden;
         }
-        h1 {
-            color: #333;
-            text-align: center;
+
+        .flame {
+            width: 20px;
+            height: 40px;
+            background: radial-gradient(circle at 50% 30%, #ff9800 40%, #ff5722 70%, transparent 80%);
+            border-radius: 50% 50% 50% 50%;
+            opacity: 0.8;
+            animation: flicker 1s infinite alternate;
+            mix-blend-mode: screen;
+        }
+
+        @keyframes flicker {
+            0% {
+                transform: scale(1) translateY(0) rotate(0deg);
+                opacity: 0.9;
+            }
+            25% {
+                transform: scale(1.05) translateY(-2px) rotate(2deg);
+                opacity: 0.85;
+            }
+            50% {
+                transform: scale(0.95) translateY(2px) rotate(-2deg);
+                opacity: 0.8;
+            }
+            75% {
+                transform: scale(1.1) translateY(-1px) rotate(1deg);
+                opacity: 0.9;
+            }
+            100% {
+                transform: scale(1) translateY(0) rotate(0deg);
+                opacity: 0.85;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>
-        I am not sure why are you even here, but here you are...
-        <br>maybe, you should go and listen to Alban Berg's <i>Lulu</i>
-        <br>Now gtfo <3
-    </h1>
+    <div class="flame"></div>
+
+    <script>
+        const flame = document.querySelector('.flame');
+
+        function blowOut() {
+            flame.style.transition = 'opacity 0.8s ease-out';
+            flame.style.opacity = '0';
+        }
+
+        document.addEventListener('click', blowOut);
+        document.addEventListener('touchstart', blowOut);
+    </script>
 </body>
 </html>
